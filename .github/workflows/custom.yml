@@ -103,7 +103,7 @@ on:
         description: 'String JSON list of plug-ins'
         required: true
         type: string
-        default: '{"ss":"y","v2ray":"n","xray":"y","trojan":"y","ssobfs":"y","smartdns":"y","vlmcsd":"y","ttyd":"n","iperf3":"n"}'
+        default: '{"zerotier":"y","v2ray":"n","xray":"n","trojan":"n","ssobfs":"n","smartdns":"n","vlmcsd":"n","ttyd":"n","iperf3":"y"}'
       customization:
         description: 'String JSON list of Customization'
         required: true
@@ -170,7 +170,7 @@ jobs:
           echo "wifi5gssid=${{fromJson(inputs.customization).wifi5gssid}}" >> $GITHUB_ENV
           echo "wifi5gpsk=${{fromJson(inputs.customization).wifi5gpsk}}" >> $GITHUB_ENV
           # plugins
-          echo "ss=${{fromJson(inputs.plugins).ss}}" >> $GITHUB_ENV
+          echo "zerotier=${{fromJson(inputs.plugins).ss}}" >> $GITHUB_ENV
           echo "v2ray=${{fromJson(inputs.plugins).v2ray}}" >> $GITHUB_ENV
           echo "xray=${{fromJson(inputs.plugins).xray}}" >> $GITHUB_ENV
           echo "trojan=${{fromJson(inputs.plugins).trojan}}" >> $GITHUB_ENV
@@ -202,7 +202,7 @@ jobs:
           fi
           cp -f configs/templates/${{ matrix.target }}.config .config
           # include plugin
-          echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=${{env.ss}}" >> .config
+          echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=${{env.zerotier}}" >> .config
           echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=${{env.v2ray}}" >> .config
           echo "CONFIG_FIRMWARE_INCLUDE_XRAY=${{env.xray}}" >> .config
           echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=${{env.trojan}}" >> .config
